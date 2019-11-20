@@ -31,6 +31,10 @@ client.on("ready", () => {
 
 client.on("message", async message => {
     const prefix = "-";
+    
+    if(message.channel == bot.channels.find("name","host-apply") || bot.channels.find("name","report-player") ) {
+        message.delete(5000);
+     }
 
     if (message.author.bot) return;
 
@@ -52,10 +56,6 @@ client.on("message", async message => {
 
     if (command) 
         command.run(client, message, args);
-    
-    if(message.channel == bot.channels.find("name","host-apply") || bot.channels.find("name","report-player") ) {
-       message.delete(5000);
-    }
     
     });
 
