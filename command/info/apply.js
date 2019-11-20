@@ -6,6 +6,7 @@ module.exports = {
     category: "info",
     description: "Host something",
     run: async (client, message, args) => {
+        message.delete(10000);
         const splitted = args
             .join(" ")
             .split(" | ");
