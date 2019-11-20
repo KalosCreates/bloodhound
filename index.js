@@ -53,8 +53,9 @@ client.on("message", async message => {
     if (command) 
         command.run(client, message, args);
     });
-bot.on('error', err => {
+
+client.on(`error`, err => {
     console.log(err);
-})
+    });
 
 client.login(process.env.TOKEN);
