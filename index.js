@@ -23,8 +23,8 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "BH Customs",
-            type: "WATCHING"
+            name: "#RELEASETHEHOUNDS",
+            type: "PLAYING"
         }
     }); 
 })
