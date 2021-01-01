@@ -1,41 +1,51 @@
-const { RichEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
-
+const { MessageEmbed } = require("discord.js");
 module.exports = {
+  name: "report",
+  category: "moderation",
+  description: "Report a user of your choice!",
+  usage: "<User mention>",
+  run: async (bot, message, args) => {
+    if (!message.member.permissions.has("MANAGE_MESSAGES"))
+      return message.channel.send(`No.`);
+    let User = message.mentions.users.first() || null;
 
-    name: "report",
-    category: "moderation",
-    description: "Reports a member",
-    usage: "<mention, id>",
-
-    run: async (client, message, args) => {
-                if (message.deletable) message.delete();
-                
-                let rMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-
-        if (!rMember)
-            return message.reply("Couldn't find that person").then(m => m.delete(5000));
-            
-        if (rMember.hasPermission("BAN_MEMBERS") || rMember.user.bot)
-            return message.channel.send("Can't report that member").then(m => m.delete(5000));
-
-        if (!args[1])
-            return message.channel.send("Please provide a reason for the report").then(m => m.delete(5000));
-            
-        const channel = message.guild.channels.find(c => c.name === "reports")
-
-        if (!channel)
-            return message.channel.send("Couldn't find a `#reports` channel").then(m => m.delete(5000));
-            const embed = new RichEmbed()
-            .setColor("#ff0000")
-            .setTimestamp()
-            .setFooter(message.guild.name, message.guild.iconURL)
-            .setAuthor("Reported member", rMember.user.displayAvatarURL)
-            .setDescription(stripIndents`**> Member:** ${rMember} (${rMember.user.id})
-            
-            **> Reported by:** ${message.member}
-            **> Reported in:** ${message.channel}
-            **> Reason:** ${args.slice(1).join(" ")}`);
-            return channel.send(embed);
+    if (User == null) {
+      return message.channel.send(`You did not mention a user!`);
+    } else {
+      let Reason = message.content.slice(bot.prefix.length + 22 + 7) || null;
+      if (Reason == null) {
+        return message.channel.send(
+          `You did not specify a reason for the report!`
+        );
+      }
+      let Avatar = User.displayAvatarURL();
+      let Channel = message.guild.channels.cache.find(
+        (ch) => ch.name === "reports"
+      );
+      if (!Channel)
+        return message.channel.send(
+          `There is no channel in this guild which is called \`reports\``
+        );
+      let Embed = new MessageEmbed()
+        .setTitle(`New report!`)
+        .setDescription(
+          `The moderator \`${message.author.tag}\` has reported the user \`${User.tag}\`! `
+        )
+        .setColor(`RED`)
+        .setThumbnail(Avatar)
+        .addFields(
+          { name: "Mod ID", value: `${message.author.id}`, inline: true },
+          { name: "Mod Tag", value: `${message.author.tag}`, inline: true },
+          { name: "Reported ID", value: `${User.id}`, inline: true },
+          { name: "Reported Tag", value: `${User.tag}`, inline: true },
+          { name: "Reason", value: `\`${Reason.slice(1)}\``, inline: true },
+          {
+            name: "Date (M/D/Y)",
+            value: `${new Intl.DateTimeFormat("en-US").format(Date.now())}`,
+            inline: true,
+          }
+        );
+      Channel.send(Embed);
     }
-}
+  },
+};
