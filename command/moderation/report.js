@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-  name: "report",
+  name: "bot-commands",
   category: "moderation",
   description: "Report a user of your choice!",
   usage: "<User mention>",
