@@ -23,7 +23,7 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "Derek Chauvin",
+            name: "Breathing Simulator",
             type: "PLAYING"
         }
     }); 
