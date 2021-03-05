@@ -23,7 +23,7 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "#FeelTheAdrenaline",
+            name: "Derek Chauvin",
             type: "PLAYING"
         }
     }); 
