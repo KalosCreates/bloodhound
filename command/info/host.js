@@ -11,7 +11,7 @@ module.exports = {
             .split(" | ");
 
         const embed = new RichEmbed()
-            .setURL("https://teambh.ca/") 
+            .setURL("https://pornhub.com") 
             .setTitle(splitted[0])
             .addField("Custom key", splitted[1], true)
             .addField("Host", message.author, true)
@@ -27,7 +27,7 @@ module.exports = {
 
             
 
-        const channel = message.guild.channels.find(channel => channel.name === "custom-events");
+        const channel = message.guild.channels.find(channel => channel.name === "chad");
 
         channel.send(embed);
     }
