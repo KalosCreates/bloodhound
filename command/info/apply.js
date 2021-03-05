@@ -12,7 +12,6 @@ module.exports = {
             .split(" | ");
 
         const embed = new RichEmbed()
-            .setURL("https://teambh.ca/") 
             .setTitle(splitted[0])
             .addField("When:", splitted[1], true)
             .addField("Applied by:", message.author, true)
@@ -21,7 +20,7 @@ module.exports = {
 
             
 
-        const channel = message.guild.channels.find(channel => channel.name === "applications");
+        const channel = message.guild.channels.find(channel => channel.name === "chad");
 
         channel.send(embed);
     }
