@@ -23,7 +23,7 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "Breathing Simulator",
+            name: "Roblox Royale",
             type: "PLAYING"
         }
     }); 
