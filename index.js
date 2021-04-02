@@ -23,7 +23,7 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "Roblox Royale",
+            name: "UNDERRATED",
             type: "PLAYING"
         }
     }); 
