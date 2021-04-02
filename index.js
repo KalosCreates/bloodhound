@@ -23,7 +23,7 @@ client.on("ready", () => {
         
         status: "online",
         game: {
-            name: "UNDERRATED",
+            name: "ESPORTS",
             type: "PLAYING"
         }
     }); 
